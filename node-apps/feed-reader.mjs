@@ -56,7 +56,7 @@ while (input != 'quit') {
         }
     }
 
-    input = await question('Enter command (list, add, del, read, quit: ');
+    input = await question('Enter command (list, add, del, read, quit): ');
 
 }
 
