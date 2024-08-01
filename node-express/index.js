@@ -1,4 +1,4 @@
-import {start} from './api/api.js';
+import {start} from './app/app.js';
 
 start();
 

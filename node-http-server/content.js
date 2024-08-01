@@ -44,4 +44,4 @@ export const view = (content) => `<!DOCTYPE html>
         <body>
             ${ content }
         </body>
-        </html>`
+        </html>`;
