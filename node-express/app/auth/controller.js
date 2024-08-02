@@ -1,13 +1,25 @@
+import { compare } from './crypt.js';
+import {User} from './model.js';
+
 export const showLogin = (req, res) => res.render('auth/login', {title: 'Login', layout: 'plain'});
 
-export function authenticate(req, res) {
+export async function authenticate(req, res) {
     const { email, password } = req.body;
 
     if (!email || !password) {
         res.redirect('/login');
         return;
     }
-    if (email.toLowerCase() === 'admin@admin.com' && password === 'password') {
+
+    const user = await User.findOne({email: email.toLowerCase()});
+
+    if (!user) {
+        res.redirect('/login');
+        return;
+    }
+
+
+    if (await compare (password, user.password)) {
         req.session.user = {
             email,
             isAuthenticated: true

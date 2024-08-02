@@ -6,22 +6,14 @@ export async function createGuitar(req, res) {
 
 
 export async function deleteGuitar(req, res) {
-    const id = parseInt(req.params.id, 10);
+    const id = req.params.id;
 
-    if (!id) {
+    if (!isIdValid(id)) {
         res.sendStatus(404)
         return;
     }
 
-    const guitar = await getById(id);
-    if (!guitar)  {
-        res.sendStatus(404);
-        return;
-    }
-
-    res.render('guitars/form', {guitar});
-
-    await removeGuitar(guitar);
+    await removeGuitar(id);
     res.redirect('/guitars');
 };
 
